@@ -1,0 +1,11 @@
+{
+  "cooking.nytimes.com": {
+    "recipeName": "//h1[contains(@class, 'recipe-title')]",
+    "ingredient": {
+        "name": "//li[@itemprop='recipeIngredient']/span[@class='ingredient-name']",
+        "quantity": "//li[@itemprop='recipeIngredient']/span[@class='quantity']",
+        "unit": ""
+    },
+    "cookingStep": "//ol[@class='recipe-steps']/li"
+  }
+}
