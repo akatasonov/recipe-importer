@@ -47,9 +47,16 @@ Example:
 
 #### Notes
 The endpoint should work with the following examples:
+- https://cooking.nytimes.com/recipes/1017518-panzanella-with-mozzarella-and-herbs (Should be possible despite pay-wall)
+- https://www.eatthelove.com/cookies-and-cream-cookies/
+- https://www.maangchi.com/recipe/bugeopo-gochujang-muchim
+- http://www.laurainthekitchen.com/recipes/croque-madam/
 
-https://cooking.nytimes.com/recipes/1017518-panzanella-with-mozzarella-and-herbs (Should be possible despite pay-wall)
-https://www.eatthelove.com/cookies-and-cream-cookies/
-https://www.maangchi.com/recipe/bugeopo-gochujang-muchim
-http://www.laurainthekitchen.com/recipes/croque-madam/
-You are welcome to use external libraries.
+### Solution
+At a glance there are multiple ways to solve this problem.
+
+#### Parsing HTML server-side
+The most simple way is to load the HTML of the page using the URL passed and somehow parse the HTML to find the recipe name, ingredients, steps, etc. For example we might use Cheerio.js to query the HTML in jQuery-like style or use htmlparser2. However we know that these days a significant portion of web sites in the Internet require JavaScript, some won't even render anything if JavaScript is disabled. Obviously just parsing HTML download from an HTTP request doesn't look like a good solution and it is likely that even if it works now with the websites above it might stop working anytime because of lack of JS execution
+
+#### Executing a website on the server-side with a headless browser
+This is a more elegant and flexible solution than the one above since it allows any website to "render" (though render is not a correct term in a headless browser environment) as it would do in a normal desktop browser. This approach supports working with the HTML of any website in the Internet, independent of how complex a website is.
