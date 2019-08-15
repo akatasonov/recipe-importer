@@ -7,5 +7,32 @@
         "unit": ""
     },
     "cookingStep": "//ol[@class='recipe-steps']/li"
+  },
+  "www.eatthelove.com": {
+    "recipeName": "//h1[@class='entry-title']",
+    "ingredient": {
+        "name": "//span[@itemprop='ingredients']/text()",
+        "quantity": "",
+        "unit": ""
+    },
+    "cookingStep": "//span[@itemprop='recipeInstructions'] | //p/span[@itemprop='recipeInstructions']/../following-sibling::p"
+  },
+  "www.maangchi.com": {
+    "recipeName": "//h1[contains(@class, 'entrytitle')]",
+    "ingredient": {
+        "name": "//h4/following-sibling::ul/li",
+        "quantity": "",
+        "unit": ""
+    },
+    "cookingStep": "//h4/following-sibling::ol/li"
+  },
+  "www.laurainthekitchen.com": {
+    "recipeName": "//h1",
+    "ingredient": {
+        "name": "//div[@id='recipe-ingredients']/ul/li/text()",
+        "quantity": "",
+        "unit": ""
+    },
+    "cookingStep": "//div[@id='recipe-process']/ul"
   }
 }

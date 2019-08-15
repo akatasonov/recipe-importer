@@ -56,14 +56,14 @@ The endpoint should work with the following examples:
 At a glance there are multiple ways to solve this problem.
 
 #### Parsing HTML server-side
-The most simple way to solve this exercise is to parse the HTML response of the web server as-is. For example we might use Cheerio.js to query the HTML in jQuery-like style or use htmlparser2. However we know that these days a significant portion of web sites on the Internet require JavaScript, some won't even render anything if JavaScript is disabled. Obviously just parsing HTML response from a HTTP request doesn't look like a good solution and it is likely that even if it works now with the websites above it might stop working anytime because of lack of JS execution.
+The most simple way to solve this exercise is to parse the HTML response of the web server as-is. For example we might use Cheerio.js to query the HTML in jQuery-like style or use htmlparser2. However we know that these days a significant portion of websites on the Internet require JavaScript, some won't even render anything if JavaScript is disabled. Obviously just parsing HTML response from a HTTP request doesn't look like a good solution and it is likely that even if it works now with the websites above it might stop working anytime because of lack of JS execution.
 
 #### Executing a website on the server-side with a headless browser
 This is a more elegant and flexible solution than the one above, since it allows any website to "render" (though render is not a correct term in a headless browser environment) as it would do in a normal desktop browser. This approach supports working with the HTML of any website on the Internet, independent of how complex a website is.
-The only drawback of this solution, comparing to the parsing HTML returned by the web server, is speed. A headless browser takes time (and CPU/memory resources) to download the HTML and all the page assets, run JavaScript (which in turn can lead to more assets being downloaded and parsed) and finally get a DOM representation of a web page. Usually it takes several seconds, sometimes even longer than 10s (for web pages full of adware JS and tracking scripts) for the DOM to finalize. However, since we don't have any performance goals for this exercise, we're going to bear with it.
+The only drawback of this solution, comparing to the parsing HTML returned by the web server, is speed. A headless browser takes time (and CPU/memory resources) to download the HTML and all the page assets, run JavaScript (which in turn can lead to more assets being downloaded and parsed) and finally get a DOM representation of a webpage. Usually it takes several seconds, sometimes even longer than 10s (for webpages full of adware JS and tracking scripts) for the DOM to finalize. However, since we don't have any performance goals for this exercise, we're going to bear with it.
 
-#### Ways to find the content we're looking for on a web page
-There are several ways we can solve the problem of figuring out where to look for specific content (recipe name, ingredients, cooking steps, etc) on a web page:
+#### Ways to find the content we're looking for on a webpage
+There are several ways we can solve the problem of figuring out where to look for specific content (recipe name, ingredients, cooking steps, etc) on a webpage:
 
   - use regular expressions to find matches
     - regular expressions are hard to read and can be quite complicated
@@ -77,4 +77,11 @@ There are several ways we can solve the problem of figuring out where to look fo
     - captures relationships between elements in DOM fully
 
 #### A quick summary
-So lets sum it up: we're going to use a headless browser to process an URL and we're going to use XPath expressions, specific to each website, to find the content we're looking for.
+So lets sum it up: we're going to use a headless browser to process an URL and we're going to use XPath expressions, specific to each website, to find the content we're looking for. The expressions are stored in the config/default.json. The format is self explanatory, except the very first key which is either the full URL of a webpage or a partial URL (should always include at least the domain). It is highly likely that all cooking recipes on a website follow the same page structure.
+https://devhints.io/xpath is a nice cheatsheet
+
+#### Launching
+Clone the source code run the following commands in the root of the project:
+- `npm install`
+- `npm run start` or
+  - `npm test` to run tests and exit

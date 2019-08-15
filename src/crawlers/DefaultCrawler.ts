@@ -97,26 +97,28 @@ export class DefaultCrawler {
       }
 
       // Eval the ingredient quantity
-      logger.info(`Evaluating ingredientQuantity using ${expressions.ingredient.quantity}`);
-      const ingredientQArr = await page.$x(expressions.ingredient.quantity).catch((err) => {
-        return reject(err);
-      });
-
-      if (!ingredientQArr) {
-        return reject(new Error(ingredientsNotFound));
-      }
-
-      if (!ingredientQArr.length) {
-        return reject(new Error(ingredientsNotFound));
-      }
-
       const ingredientQs = [];
-      for (const ingredientQEl of ingredientQArr) {
-        let ingredientQ = await page.evaluate((element) => element.textContent, ingredientQEl).catch((err) => {
-          return reject(new Error(ingredientsNotFound));
+      if (expressions.ingredient.quantity) {
+        logger.info(`Evaluating ingredientQuantity using ${expressions.ingredient.quantity}`);
+        const ingredientQArr = await page.$x(expressions.ingredient.quantity).catch((err) => {
+          return reject(err);
         });
-        ingredientQ = ingredientQ.trim();
-        ingredientQs.push(ingredientQ);
+
+        if (!ingredientQArr) {
+          return reject(new Error(ingredientsNotFound));
+        }
+
+        if (!ingredientQArr.length) {
+          return reject(new Error(ingredientsNotFound));
+        }
+
+        for (const ingredientQEl of ingredientQArr) {
+          let ingredientQ = await page.evaluate((element) => element.textContent, ingredientQEl).catch((err) => {
+            return reject(new Error(ingredientsNotFound));
+          });
+          ingredientQ = ingredientQ.trim();
+          ingredientQs.push(ingredientQ);
+        }
       }
 
       // Eval the ingredient units
@@ -176,8 +178,8 @@ export class DefaultCrawler {
       const recipe = new Recipe(recipeName);
       for (let i = 0; i < ingredientNames.length; i++) {
         const name = ingredientNames[i];
-        const quantity = ingredientQs[i];
-        const unit = ingredientUnits[i] ? ingredientUnits[i] : '';
+        const quantity = ingredientQs[i] ? ingredientQs[i] : undefined;
+        const unit = ingredientUnits[i] ? ingredientUnits[i] : undefined;
         recipe.addIngredient({ name, quantity, unit });
       }
 
