@@ -81,7 +81,7 @@ So lets sum it up: we're going to use a headless browser to process an URL and w
 https://devhints.io/xpath is a nice cheatsheet
 
 #### Launching
-Clone the source code run the following commands in the root of the project:
+Clone the source code and run the following commands in the root of the project:
 - `npm install`
-- `npm run start` or
-  - `npm test` to run tests and exit
+- `npm test` to run tests
+- `npm run start-dev` and go to http://localhost:3000

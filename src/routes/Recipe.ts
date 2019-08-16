@@ -1,7 +1,6 @@
 import { logger } from '@shared';
 import { Request, Response, Router } from 'express';
 import { BAD_REQUEST, OK } from 'http-status-codes';
-import { paramMissingError, stringIsAValidUrl, scrapingRuleNotFound } from '@shared';
 import { DefaultCrawler } from '@crawlers';
 
 // Init shared

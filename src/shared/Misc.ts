@@ -1,7 +1,6 @@
 import { URL } from 'url';
 import express from 'express';
 import { UNPROCESSABLE_ENTITY } from 'http-status-codes';
-import util from 'util';
 import { logger } from './Logger';
 
 export const paramMissingError = 'One or more of the required parameters was missing.';
@@ -39,6 +38,12 @@ declare module 'express-serve-static-core' {
 // Express middleware to fetch a scraping rule based on the URL parameter
 export const recipeMiddleware = (req: express.Request, res: express.Response, next: () => void) => {
 
+  // Exit if the path is not /recipe to not break other routes that don't have
+  // anything to do with the /recipe
+  if (req.path !== '/recipe') {
+    next();
+    return;
+  }
   // Check if we have the url GET parameter
   if (!('url' in req.query)) {
     return res.status(UNPROCESSABLE_ENTITY).json({ error: paramMissingError });

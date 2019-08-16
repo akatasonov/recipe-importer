@@ -1,7 +1,7 @@
 
 export interface IIngredient {
   name: string;
-  quantity: number;
+  quantity?: string;
   unit?: string;
 }
 
@@ -21,6 +21,12 @@ export class Recipe implements IRecipe {
     this.name = name;
     this.ingredients = [];
     this.steps = [];
+  }
+
+  public assignRecipe(recipe: IRecipe) {
+    this.name = recipe.name;
+    this.ingredients = recipe.ingredients;
+    this.steps = recipe.steps;
   }
 
   public addIngredient(ingredient: IIngredient) {
