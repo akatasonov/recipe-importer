@@ -77,7 +77,7 @@ There are several ways we can solve the problem of figuring out where to look fo
     - captures relationships between elements in DOM fully
 
 #### A quick summary
-So lets sum it up: we're going to use a headless browser to process an URL and we're going to use XPath expressions, specific to each website, to find the content we're looking for. The expressions are stored in the config/default.json. The format is self explanatory, except the very first key which is either the full URL of a webpage or a partial URL (should always include at least the domain). It is highly likely that all cooking recipes on a website follow the same page structure.
+So lets sum it up: we're going to use a headless browser (Chromium) to process an URL and we're going to use XPath expressions, specific to each website, to find the content we're looking for. The expressions are stored in the config/default.json. The format is self explanatory, except the very first key which is either the full URL of a webpage or a partial URL (should always include at least the domain). It is highly likely that all cooking recipes on a website follow the same page structure.
 https://devhints.io/xpath is a nice cheatsheet
 
 #### Launching
